@@ -1,7 +1,8 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 // Hard code this to production but can be adapted to accept args to change env.
 const mode = 'production';
@@ -46,6 +47,7 @@ module.exports = {
   },
 
   plugins: [
+    new RemoveEmptyScriptsPlugin(),
     // Define the filename pattern for CSS.
     new MiniCssExtractPlugin({
       filename: '[name].css',
