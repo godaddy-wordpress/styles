@@ -1,0 +1,19 @@
+/*
+ * import { Modal } from '@wordpress/components'
+ */
+
+.components-modal__frame,
+&.components-modal__frame {
+	border-radius: 1rem;
+
+	.components-modal__header {
+		.components-button.has-icon {
+			margin-right: -1em;
+		}
+	}
+
+	.components-modal__content {
+		margin-top: 0;
+		padding: 2.5rem;
+	}
+}

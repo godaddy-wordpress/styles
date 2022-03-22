@@ -1,46 +1,7 @@
 .godaddy-styles {
-	$godaddy-brand-color: #129d9e;
+	$godaddy-color-brand: #129d9e;
+	$godaddy-color-black: #222;
 
-	.components-button,
-	&.components-button {
-		border: 0;
-		border-radius: 0;
-		box-shadow: none;
-		transition: background-color, color, 0.2s ease-in-out;
-
-		&.is-primary {
-			background-color: #000;
-			color: #fff;
-
-			&:hover {
-				background-color: $godaddy-brand-color;
-			}
-		}
-
-		&.is-secondary {
-			color: $godaddy-brand-color;
-
-			&:hover {
-				border: 0;
-				box-shadow: none;
-				color: #000;
-			}
-		}
-	}
-
-	.components-modal__frame,
-	&.components-modal__frame {
-		border-radius: 1rem;
-
-		.components-modal__header {
-			.components-button.has-icon {
-				margin-right: -1em;
-			}
-		}
-
-		.components-modal__content {
-			margin-top: 0;
-			padding: 2.5rem;
-		}
-	}
+	@import "./button";
+	@import "./modal";
 }

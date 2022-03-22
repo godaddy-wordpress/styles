@@ -1,0 +1,32 @@
+/*
+ * import { Button } from '@wordpress/components'
+ */
+
+.components-button,
+&.components-button {
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	transition: background-color, color, 0.2s ease-in-out;
+
+	// variant="primary"
+	&.is-primary {
+		background-color: #000;
+		color: #fff;
+
+		&:hover {
+			background-color: $godaddy-color-brand;
+		}
+	}
+
+	// variant="secondary"
+	&.is-secondary {
+		color: $godaddy-color-brand;
+
+		&:hover {
+			border: 0;
+			box-shadow: none;
+			color: #000;
+		}
+	}
+}
