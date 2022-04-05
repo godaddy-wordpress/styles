@@ -3,7 +3,7 @@
  * Plugin Name: GoDaddy WordPress Styles
  * Plugin URI: https://godaddy.com/
  * Description: GoDaddy WordPress Styles Description
- * Version: 0.0.1
+ * Version: 0.2.1
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: GoDaddy
@@ -27,27 +27,13 @@
  * @package GoDaddy_Styles
  */
 
+namespace GoDaddy\Styles;
+
 defined( 'ABSPATH' ) || exit;
 
-define( 'GODADDY_STYLES_VERSION', '0.0.1' );
-
-function godaddy_styles_enqueue() {
-	$build_file_path = plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
-
-	$asset_file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $build_file_path )
-		? include $build_file_path
-		: array(
-			'dependencies' => array( 'wp-components' ),
-			'version'      => GODADDY_STYLES_VERSION,
-		);
-
-	wp_enqueue_style(
-		'godaddy-styles',
-		plugin_dir_url( __FILE__ ) . 'css/styles.css',
-		$asset_file['dependencies'],
-		$asset_file['version'],
-	);
+// Guard the plugin from initializing more than once.
+if ( ! class_exists( StylesLoader::class ) ) {
+	require_once dirname( __FILE__ ) . '/StylesLoader.php';
 }
 
-add_action( 'admin_enqueue_scripts', 'godaddy_styles_enqueue' );
-add_action( 'wp_enqueue_scripts', 'godaddy_styles_enqueue' );
+add_action( 'plugins_loaded', array( StylesLoader::class, 'boot' ) );
