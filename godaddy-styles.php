@@ -30,15 +30,22 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'GODADDY_STYLES_VERSION', '0.0.1' );
-define( 'GODADDY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'GODADDY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 function godaddy_styles_enqueue() {
+	$build_file_path = plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
+
+	$asset_file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $build_file_path )
+		? include $build_file_path
+		: array(
+			'dependencies' => array( 'wp-components' ),
+			'version'      => GODADDY_STYLES_VERSION,
+		);
+
 	wp_enqueue_style(
 		'godaddy-styles',
-		GODADDY_PLUGIN_URL . 'css/styles.css',
-		array( 'wp-components' ),
-		GODADDY_STYLES_VERSION
+		plugin_dir_url( __FILE__ ) . 'css/styles.css',
+		$asset_file['dependencies'],
+		$asset_file['version'],
 	);
 }
 
