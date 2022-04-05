@@ -6,7 +6,8 @@
 npm-debug.log
 yarn-error.log
 
-build/
+build/*
+!build/index.css
 node_modules/
 vendor/
 coverage/
