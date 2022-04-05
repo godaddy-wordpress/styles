@@ -1,0 +1,27 @@
+{
+	"name": "godaddy-wordpress/styles",
+	"version": "0.2.1",
+	"description": "",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-only",
+	"authors": [
+		{
+			"name": "GoDaddy",
+			"homepage": "https://godaddy.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"GoDaddy\\Styles\\": ""
+		}
+	},
+	"archive": {
+		"exclude": [
+			"*.lock",
+			"package*",
+			"README.md",
+			"godaddy-styles.php",
+			"src"
+		]
+	}
+}
