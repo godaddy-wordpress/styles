@@ -16,7 +16,9 @@
     "packages-update": "wp-scripts packages-update",
     "postpackages-update": "npm run build",
     "clean": "wp-env stop; rm -rf build node_modules",
-    "wp-env": "wp-env"
+    "wp-env": "wp-env",
+    "lint:php": "wp-env run phpunit 'composer run lint -d /var/www/html/wp-content/plugins/styles/'; #we use phpunit container because composer container only use php 8;",
+    "test:php": "wp-env run phpunit 'phpunit -c /var/www/html/wp-content/plugins/styles/phpunit.xml.dist --verbose'"
   },
   "publishConfig": {
     "access": "public"

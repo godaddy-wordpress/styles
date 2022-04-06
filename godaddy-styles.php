@@ -36,4 +36,4 @@ if ( ! class_exists( StylesLoader::class ) ) {
 	require_once dirname( __FILE__ ) . '/StylesLoader.php';
 }
 
-add_action( 'plugins_loaded', array( StylesLoader::class, 'boot' ) );
+add_action( 'plugins_loaded', array( StylesLoader::getInstance(), 'boot' ) );
