@@ -1,6 +1,6 @@
 {
   "name": "@godaddy-wordpress/styles",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Adding GoDaddy look and style to default WordPress components.",
   "keywords": [
     "godaddy",
