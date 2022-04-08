@@ -6,6 +6,7 @@
  */
 
 use GoDaddy\Styles\StylesLoader;
+use org\bovigo\vfs\vfsStream;
 
 /**
  * Tests the StylesLoader class.
@@ -14,18 +15,60 @@ class StylesLoaderTest extends WP_UnitTestCase {
 	/**
 	 * The StylesLoader instance.
 	 *
-	 * @var \GoDaddy\Styles\StylesLoader;
+	 * @var \GoDaddy\Styles\StylesLoader
 	 */
 	private $styles_loader;
 
+	/**
+	 * The virtual filesystem stream.
+	 *
+	 * @var \org\bovigo\vfs\vfsStream
+	 */
+	private $virt_fs;
+
+	/**
+	 * The base_path of vfsStream.
+	 *
+	 * @var string
+	 */
+	private $plugin_base_path;
+
+	/**
+	 * The base_url of vfsStream.
+	 *
+	 * @var string
+	 */
+	private $plugin_base_url;
+
 	public function set_up() {
         parent::set_up();
+
 		$this->styles_loader = new StylesLoaderStub();
+
+		$__DIR__ = '/wp-content/plugins/styles/';
+
+		$this->virt_fs = vfsStream::setup( $__DIR__, null, array(
+			'build' => array(
+				'latest.css' => '',
+				'wp' => array(
+					'5.8.0.css' => '',
+					'5.9.0.css' => '',
+					'5.9.1.css' => '',
+					'5.9.2.css' => '',
+				),
+			),
+		) );
+
+		$this->plugin_base_path = vfsStream::path( vfsStream::url( $__DIR__ ) );
+		$this->plugin_base_url = vfsStream::url( $__DIR__ );
     }
 
 	public function tear_down() {
 		parent::tear_down();
+
 		$this->styles_loader = null;
+		$this->virt_fs = null;
+
 		unset( $GLOBALS['wp_styles'] );
     }
 
@@ -122,6 +165,8 @@ class StylesLoaderTest extends WP_UnitTestCase {
 	public function test_skips_enqueue_when_mu_plugin_registered() {
 		$must_use_styles_loader = new MustUseStylesLoaderStub;
 		$must_use_styles_loader->boot();
+		$must_use_styles_loader->setBasePath( $this->plugin_base_path );
+		$must_use_styles_loader->setBaseUrl( $this->plugin_base_url );
 		do_action( 'wp_enqueue_scripts' );
 
 		$this->assertEquals(
@@ -157,12 +202,8 @@ class MustUseStylesLoaderStub extends StylesLoader {
 	const HANDLE = 'godaddy-styles-testing';
 
 	public function enqueue() {
-		add_filter( 'plugins_url', array( $this, 'plugins_url_callback' ) );
+		$this->base_path = str_replace( 'plugins/', 'mu-plugins/', $this->base_path );
+		$this->base_url = str_replace( 'plugins/', 'mu-plugins/', $this->base_url );
 		parent::enqueue();
-		remove_filter( 'plugins_url', array( $this, 'plugins_url_callback' ) );
-	}
-
-	public function plugins_url_callback( $url ) {
-		return str_replace( 'plugins/', 'mu-plugins/', $url );
 	}
 }
