@@ -1,15 +1,18 @@
 .cache/
 .DS_Store
 .vscode/
+.idea/
 .wp-env.override.json
 
 npm-debug.log
 yarn-error.log
 
-build/*
-!build/index.css
+# Ignore files in sub-directories, not the directories themselves.
+build/**
+!build/**/
+# Ignore everything in subdirectories except the compiled css files.
+!build/**/*.css
+
 node_modules/
 vendor/
 coverage/
-
-.idea/
