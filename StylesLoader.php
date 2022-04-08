@@ -26,6 +26,20 @@ class StylesLoader {
 	const HANDLE = 'godaddy-styles';
 
 	/**
+	 * The base path.
+	 *
+	 * @var string
+	 */
+	protected $base_path;
+
+	/**
+	 * The base url.
+	 *
+	 * @var string
+	 */
+	protected $base_url;
+
+	/**
      * The current instance.
      *
      * @var static
@@ -70,7 +84,7 @@ class StylesLoader {
 		}
 
 		$path_partial = $this->assetPathPartial();
-		$build_file_path = plugin_dir_path( __FILE__ ) . 'build/' . $path_partial . '.asset.php';
+		$build_file_path = $this->base_path . 'build/' . $path_partial . '.asset.php';
 
 		$asset_file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $build_file_path )
 			? include $build_file_path
@@ -81,10 +95,18 @@ class StylesLoader {
 
 		wp_enqueue_style(
 			static::HANDLE,
-			plugin_dir_url( __FILE__ ) . 'build/' . $path_partial . '.css',
+			$this->base_url . 'build/' . $path_partial . '.css',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 		);
+	}
+
+	public function setBasePath( $path ) {
+		$this->base_path = $path;
+	}
+
+	public function setBaseUrl( $url ) {
+		$this->base_url = $url;
 	}
 
 	public function hasRegistered() {
@@ -126,7 +148,7 @@ class StylesLoader {
 
 		// Look for the stylesheet matching the current version number.
 		foreach( $version_targets as $version_number ) {
-			if ( file_exists( plugin_dir_path( __FILE__ ) . 'build/wp/' . $version_number . '.css' ) ) {
+			if ( file_exists( $this->base_path . 'build/wp/' . $version_number . '.css' ) ) {
 				$asset_path_partial = 'wp/' . $version_number;
 				break;
 			}

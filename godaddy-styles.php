@@ -36,4 +36,7 @@ if ( ! class_exists( StylesLoader::class ) ) {
 	require_once dirname( __FILE__ ) . '/StylesLoader.php';
 }
 
+StylesLoader::getInstance()->setBasePath( plugin_dir_path( __FILE__ ) );
+StylesLoader::getInstance()->setBaseUrl( plugin_dir_url( __FILE__ ) );
+
 add_action( 'plugins_loaded', array( StylesLoader::getInstance(), 'boot' ) );
