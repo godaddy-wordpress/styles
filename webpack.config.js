@@ -6,6 +6,5 @@ module.exports = {
 
 	entry: {
 		latest: path.resolve( process.cwd(), 'src', 'index.js' ),
-		[ 'wp/5.9.0' ]: path.resolve( process.cwd(), 'src', 'index.scss' ),
 	},
 };
