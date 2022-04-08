@@ -56,22 +56,30 @@ class StylesLoader {
     }
 
 	public function boot() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'loadStyles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'loadStyles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
 	}
 
-	public function loadStyles() {
+	public function enqueue() {
+		if (
+			$this->hasRegistered() &&
+			! $this->isMustUse() &&
+			version_compare( static::VERSION, $this->getRegisteredVersion(), '>' )
+		) {
+			wp_styles()->remove( static::HANDLE );
+		}
+
 		$build_file_path = plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
 
 		$asset_file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $build_file_path )
 			? include $build_file_path
 			: array(
 				'dependencies' => array( 'wp-components' ),
-				'version'      => self::VERSION,
+				'version'      => static::VERSION,
 			);
 
 		wp_enqueue_style(
-			self::HANDLE,
+			static::HANDLE,
 			plugin_dir_url( __FILE__ ) . 'build/index.css',
 			$asset_file['dependencies'],
 			$asset_file['version'],
@@ -79,15 +87,19 @@ class StylesLoader {
 	}
 
 	public function hasRegistered() {
-		return wp_styles()->query( self::HANDLE ) !== false;
+		return wp_styles()->query( static::HANDLE ) !== false;
 	}
 
 	public function getRegistered() {
-		return wp_styles()->query( self::HANDLE );
+		return wp_styles()->query( static::HANDLE );
 	}
 
 	public function isMustUse() {
 		$src = $this->getRegistered()->src;
 		return ! empty( $src ) && strpos( $src, 'mu-plugins' ) !== false;
+	}
+
+	public function getRegisteredVersion() {
+		return $this->getRegistered()->ver;
 	}
 }
