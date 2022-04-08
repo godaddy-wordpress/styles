@@ -69,7 +69,8 @@ class StylesLoader {
 			wp_styles()->remove( static::HANDLE );
 		}
 
-		$build_file_path = plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
+		$path_partial = $this->assetPathPartial();
+		$build_file_path = plugin_dir_path( __FILE__ ) . 'build/' . $path_partial . '.asset.php';
 
 		$asset_file = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG && file_exists( $build_file_path )
 			? include $build_file_path
@@ -80,7 +81,7 @@ class StylesLoader {
 
 		wp_enqueue_style(
 			static::HANDLE,
-			plugin_dir_url( __FILE__ ) . 'build/index.css',
+			plugin_dir_url( __FILE__ ) . 'build/' . $path_partial . '.css',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 		);
@@ -101,5 +102,41 @@ class StylesLoader {
 
 	public function getRegisteredVersion() {
 		return $this->getRegistered()->ver;
+	}
+
+	public function assetPathPartial() {
+		global $wp_version;
+		$version_parts = explode( '.', $wp_version );
+
+		// Array containing version number target order.
+		$version_targets = array();
+
+		// Build and push minor version numbers to targets array.
+		for ( $minor_version = 0; $minor_version <= $version_parts[2]; $minor_version++ ) {
+			array_push(
+				$version_targets,
+				implode( '.', array( $version_parts[0], $version_parts[1], $minor_version ) )
+			);
+		}
+
+		// Sort in reverse order so the latest minor version is first.
+		rsort( $version_targets );
+
+		$asset_path_partial = null;
+
+		// Look for the stylesheet matching the current version number.
+		foreach( $version_targets as $version_number ) {
+			if ( file_exists( plugin_dir_path( __FILE__ ) . 'build/wp/' . $version_number . '.css' ) ) {
+				$asset_path_partial = 'wp/' . $version_number;
+				break;
+			}
+		}
+
+		// Default to latest.css if no versioned file was found.
+		if ( empty( $asset_path_partial ) ) {
+			$asset_path_partial = 'latest';
+		}
+
+		return $asset_path_partial;
 	}
 }
