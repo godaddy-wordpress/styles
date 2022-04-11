@@ -20,13 +20,6 @@ class StylesLoaderTest extends WP_UnitTestCase {
 	private $styles_loader;
 
 	/**
-	 * The virtual filesystem stream.
-	 *
-	 * @var \org\bovigo\vfs\vfsStream
-	 */
-	private $virt_fs;
-
-	/**
 	 * The base_path of vfsStream.
 	 *
 	 * @var string
@@ -45,29 +38,35 @@ class StylesLoaderTest extends WP_UnitTestCase {
 
 		$this->styles_loader = new StylesLoaderStub();
 
-		$__DIR__ = '/wp-content/plugins/styles/';
-
-		$this->virt_fs = vfsStream::setup( $__DIR__, null, array(
-			'build' => array(
-				'latest.css' => '',
-				'wp' => array(
-					'5.8.0.css' => '',
-					'5.9.0.css' => '',
-					'5.9.1.css' => '',
-					'5.9.2.css' => '',
+		// Create a virtual filesyste to test against.
+		vfsStream::setup( 'root', null, array(
+			'wp-content' => array(
+				'plugins' => array(
+					'styles' => array(
+						'build' => array(
+							'latest.css' => '',
+							'wp' => array(
+								'5.8.0.css' => '',
+								'5.9.0.css' => '',
+								'5.9.1.css' => '',
+								'5.9.2.css' => '',
+							),
+						),
+					),
 				),
 			),
 		) );
 
-		$this->plugin_base_path = vfsStream::path( vfsStream::url( $__DIR__ ) );
-		$this->plugin_base_url = vfsStream::url( $__DIR__ );
+		$__DIR__ = 'wp-content/plugins/styles/';
+
+		$this->plugin_base_path = vfsStream::url( 'root' ) . '/' . $__DIR__;
+		$this->plugin_base_url = vfsStream::url( 'root' ) . '/' . $__DIR__;
     }
 
 	public function tear_down() {
 		parent::tear_down();
 
 		$this->styles_loader = null;
-		$this->virt_fs = null;
 
 		unset( $GLOBALS['wp_styles'] );
     }
@@ -183,6 +182,61 @@ class StylesLoaderTest extends WP_UnitTestCase {
 			$newer_styles_loader->getRegisteredVersion()
 		);
     }
+
+	public function test_enqueues_latest_styles_by_default() {
+		$this->styles_loader->boot();
+		do_action( 'wp_enqueue_scripts' );
+
+		$this->assertEquals(
+			'build/latest.css',
+			$this->styles_loader->getRegistered()->src
+		);
+	}
+
+	public function test_enqueues_wp_minor_version_styles() {
+		global $wp_version;
+		$wp_version = '5.9.1';
+
+		$this->styles_loader->boot();
+		$this->styles_loader->setBasePath( $this->plugin_base_path );
+		$this->styles_loader->setBaseUrl( $this->plugin_base_url );
+		do_action( 'wp_enqueue_scripts' );
+
+		$this->assertEquals(
+			'build/wp/5.9.1.css',
+			str_replace( $this->plugin_base_path, '', $this->styles_loader->getRegistered()->src )
+		);
+	}
+
+	public function test_enqueues_last_minor_version_stylesheet_for_wp_version() {
+		global $wp_version;
+		$wp_version = '5.8.3';
+
+		$this->styles_loader->boot();
+		$this->styles_loader->setBasePath( $this->plugin_base_path );
+		$this->styles_loader->setBaseUrl( $this->plugin_base_url );
+		do_action( 'wp_enqueue_scripts' );
+
+		$this->assertEquals(
+			'build/wp/5.8.0.css',
+			str_replace( $this->plugin_base_path, '', $this->styles_loader->getRegistered()->src )
+		);
+	}
+
+	public function test_enqueues_latest_stylesheet_for_new_major_wp_verion() {
+		global $wp_version;
+		$wp_version = '6.0.0';
+
+		$this->styles_loader->boot();
+		$this->styles_loader->setBasePath( $this->plugin_base_path );
+		$this->styles_loader->setBaseUrl( $this->plugin_base_url );
+		do_action( 'wp_enqueue_scripts' );
+
+		$this->assertEquals(
+			'build/latest.css',
+			str_replace( $this->plugin_base_path, '', $this->styles_loader->getRegistered()->src )
+		);
+	}
 }
 
 class StylesLoaderStub extends StylesLoader {
