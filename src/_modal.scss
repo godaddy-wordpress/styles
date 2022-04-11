@@ -6,14 +6,36 @@
 &.components-modal__frame {
 	border-radius: 1rem;
 
-	.components-modal__header {
-		.components-button.has-icon {
-			margin-right: -1em;
-		}
-	}
-
 	.components-modal__content {
 		margin-top: 0;
 		padding: 2.5rem;
+
+		&::before {
+			margin: 0;
+		}
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+
+		.components-modal__header {
+			border-bottom: 0;
+			font-size: 2rem;
+			height: unset;
+			margin-bottom: 0.75em;
+			padding: 0;
+			position: relative;
+
+			.components-modal__header-heading {
+				font-size: 2rem;
+			}
+
+			.components-button.has-icon {
+				left: auto;
+				position: absolute;
+				right: -2em;
+				top: -2em;
+			}
+		}
 	}
 }
