@@ -1,7 +1,9 @@
 .godaddy-styles {
 	$godaddy-color-brand: #129d9e;
+	$godaddy-color-brand-toggle: #1bdbdb;
 	$godaddy-color-black: #222;
 
 	@import "./button";
 	@import "./modal";
+	@import "./toggle";
 }
