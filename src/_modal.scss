@@ -26,6 +26,10 @@
 			padding: 0;
 			position: relative;
 
+			.components-modal__icon-container {
+				margin-right: 8px;
+			}
+
 			.components-modal__header-heading {
 				font-size: 2rem;
 			}
