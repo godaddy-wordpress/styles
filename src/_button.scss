@@ -9,12 +9,16 @@
 	box-shadow: none;
 	transition: background-color, color, 0.2s ease-in-out;
 
+	&:disabled {
+		opacity: 0.5;
+	}
+
 	// isPrimary
 	&.is-primary {
 		background-color: #000;
 		color: #fff;
 
-		&:hover {
+		&:hover:not([disabled]) {
 			background-color: $godaddy-color-brand;
 		}
 	}
@@ -23,7 +27,7 @@
 	&.is-secondary {
 		color: $godaddy-color-brand;
 
-		&:hover {
+		&:hover:not([disabled]) {
 			border: 0;
 			box-shadow: none;
 			color: #000;
@@ -35,7 +39,7 @@
 		color: $godaddy-color-brand;
 		text-decoration: none;
 
-		&:hover {
+		&:hover:not([disabled]) {
 			color: $godaddy-color-black;
 		}
 	}
