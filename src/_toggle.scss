@@ -14,10 +14,12 @@
     .components-base-control__field {
         margin: 0;
 
-        .components-form-toggle {
-            &__track {
-                background-color: $godaddy-color-brand-toggle;
-            }
+        .components-form-toggle__track {
+            background-color: #f3f6f8;
+        }
+
+        .is-checked .components-form-toggle__track {
+            background-color: $godaddy-color-brand;
         }
     }
 
