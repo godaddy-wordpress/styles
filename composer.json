@@ -1,6 +1,6 @@
 {
 	"name": "godaddy-wordpress/styles",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-only",

@@ -2,6 +2,12 @@
 	$godaddy-color-brand: #129d9e;
 	$godaddy-color-black: #222;
 
+	* {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+		font-size: 13px;
+		line-height: 1.4em;
+	}
+
 	@import "./button";
 	@import "./modal";
 	@import "./toggle";

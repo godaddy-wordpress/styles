@@ -16,6 +16,7 @@
 	// isPrimary
 	&.is-primary {
 		background-color: #000;
+		box-shadow: none;
 		color: #fff;
 
 		&:hover:not([disabled]) {
@@ -25,6 +26,7 @@
 
 	// isSecondary
 	&.is-secondary {
+		box-shadow: none;
 		color: $godaddy-color-brand;
 
 		&:hover:not([disabled]) {
@@ -36,11 +38,20 @@
 
 	// isLink
 	&.is-link {
+		box-shadow: none;
 		color: $godaddy-color-brand;
 		text-decoration: none;
 
 		&:hover:not([disabled]) {
 			color: $godaddy-color-black;
+		}
+	}
+
+	// with icon (close button)
+	&.has-icon {
+		&:hover:not([disabled]) {
+			background-color: transparent;
+			color: $godaddy-color-brand;
 		}
 	}
 }
