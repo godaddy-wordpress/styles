@@ -13,7 +13,7 @@
    */
 }
 .godaddy-styles * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: "GD Sherpa", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 13px;
   line-height: 1.4em;
 }
@@ -21,6 +21,8 @@
   border: 0;
   border-radius: 0;
   box-shadow: none;
+  height: 56px !important;
+  padding: 16px 24px;
   transition: background-color, color, 0.2s ease-in-out;
 }
 .godaddy-styles .components-button:disabled, .godaddy-styles.components-button:disabled {
@@ -31,14 +33,14 @@
   box-shadow: none;
   color: #fff;
 }
-.godaddy-styles .components-button.is-primary:hover:not([disabled]), .godaddy-styles.components-button.is-primary:hover:not([disabled]) {
+.godaddy-styles .components-button.is-primary:hover:not([disabled]), .godaddy-styles .components-button.is-primary:active:not([disabled]), .godaddy-styles.components-button.is-primary:hover:not([disabled]), .godaddy-styles.components-button.is-primary:active:not([disabled]) {
   background-color: #129d9e;
 }
 .godaddy-styles .components-button.is-secondary, .godaddy-styles.components-button.is-secondary {
   box-shadow: none;
   color: #129d9e;
 }
-.godaddy-styles .components-button.is-secondary:hover:not([disabled]), .godaddy-styles.components-button.is-secondary:hover:not([disabled]) {
+.godaddy-styles .components-button.is-secondary:hover:not([disabled]), .godaddy-styles .components-button.is-secondary:active:not([disabled]), .godaddy-styles.components-button.is-secondary:hover:not([disabled]), .godaddy-styles.components-button.is-secondary:active:not([disabled]) {
   border: 0;
   box-shadow: none;
   color: #000;
@@ -48,10 +50,10 @@
   color: #129d9e;
   text-decoration: none;
 }
-.godaddy-styles .components-button.is-link:hover:not([disabled]), .godaddy-styles.components-button.is-link:hover:not([disabled]) {
+.godaddy-styles .components-button.is-link:hover:not([disabled]), .godaddy-styles .components-button.is-link:active:not([disabled]), .godaddy-styles.components-button.is-link:hover:not([disabled]), .godaddy-styles.components-button.is-link:active:not([disabled]) {
   color: #222;
 }
-.godaddy-styles .components-button.has-icon:hover:not([disabled]), .godaddy-styles.components-button.has-icon:hover:not([disabled]) {
+.godaddy-styles .components-button.has-icon:hover:not([disabled]), .godaddy-styles .components-button.has-icon:active:not([disabled]), .godaddy-styles.components-button.has-icon:hover:not([disabled]), .godaddy-styles.components-button.has-icon:active:not([disabled]) {
   background-color: transparent;
   color: #129d9e;
 }
