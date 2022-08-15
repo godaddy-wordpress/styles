@@ -38,7 +38,7 @@
 }
 .godaddy-styles .components-button.is-secondary, .godaddy-styles.components-button.is-secondary {
   box-shadow: none;
-  color: #129d9e;
+  color: #444444;
 }
 .godaddy-styles .components-button.is-secondary:hover:not([disabled]), .godaddy-styles .components-button.is-secondary:active:not([disabled]), .godaddy-styles.components-button.is-secondary:hover:not([disabled]), .godaddy-styles.components-button.is-secondary:active:not([disabled]) {
   border: 0;
@@ -51,7 +51,7 @@
   text-decoration: none;
 }
 .godaddy-styles .components-button.is-link:hover:not([disabled]), .godaddy-styles .components-button.is-link:active:not([disabled]), .godaddy-styles.components-button.is-link:hover:not([disabled]), .godaddy-styles.components-button.is-link:active:not([disabled]) {
-  color: #222;
+  color: #444444;
 }
 .godaddy-styles .components-button.has-icon:hover:not([disabled]), .godaddy-styles .components-button.has-icon:active:not([disabled]), .godaddy-styles.components-button.has-icon:hover:not([disabled]), .godaddy-styles.components-button.has-icon:active:not([disabled]) {
   background-color: transparent;
