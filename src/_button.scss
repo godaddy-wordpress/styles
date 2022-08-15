@@ -1,12 +1,13 @@
 /*
  * import { Button } from '@wordpress/components'
  */
-
 .components-button,
 &.components-button {
 	border: 0;
 	border-radius: 0;
 	box-shadow: none;
+	height: 56px !important;
+	padding: 16px 24px;
 	transition: background-color, color, 0.2s ease-in-out;
 
 	&:disabled {
@@ -19,7 +20,8 @@
 		box-shadow: none;
 		color: #fff;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			background-color: $godaddy-color-brand;
 		}
 	}
@@ -29,7 +31,8 @@
 		box-shadow: none;
 		color: $godaddy-color-brand;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			border: 0;
 			box-shadow: none;
 			color: #000;
@@ -42,14 +45,16 @@
 		color: $godaddy-color-brand;
 		text-decoration: none;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			color: $godaddy-color-black;
 		}
 	}
 
 	// with icon (close button)
 	&.has-icon {
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			background-color: transparent;
 			color: $godaddy-color-brand;
 		}
