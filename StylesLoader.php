@@ -16,7 +16,7 @@ class StylesLoader {
 	 *
 	 * @var string
 	 */
-	const VERSION = '0.4.3';
+	const VERSION = '1.0.2';
 
 	/**
 	 * The style handle.
