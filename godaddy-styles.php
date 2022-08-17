@@ -3,7 +3,7 @@
  * Plugin Name: GoDaddy WordPress Styles
  * Plugin URI: https://godaddy.com/
  * Description: GoDaddy WordPress Styles Description
- * Version: 0.4.2
+ * Version: 0.4.3
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: GoDaddy

@@ -1,16 +1,28 @@
 /*
  * import { Button } from '@wordpress/components'
  */
-
 .components-button,
 &.components-button {
 	border: 0;
-	border-radius: 0;
+	border-radius: 6px;
 	box-shadow: none;
+	padding: 1.1em 2em 1em;
 	transition: background-color, color, 0.2s ease-in-out;
 
 	&:disabled {
 		opacity: 0.5;
+	}
+
+	// Without extra padding
+	&.no-padding {
+		padding: 0;
+	}
+
+	// isBig
+	&.is-big {
+		font-size: 1.1em;
+		font-weight: 600;
+		padding: 2em;
 	}
 
 	// isPrimary
@@ -19,7 +31,8 @@
 		box-shadow: none;
 		color: #fff;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			background-color: $godaddy-color-brand;
 		}
 	}
@@ -27,9 +40,10 @@
 	// isSecondary
 	&.is-secondary {
 		box-shadow: none;
-		color: $godaddy-color-brand;
+		color: $godaddy-color-black;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			border: 0;
 			box-shadow: none;
 			color: #000;
@@ -40,16 +54,20 @@
 	&.is-link {
 		box-shadow: none;
 		color: $godaddy-color-brand;
+		padding: 0;
 		text-decoration: none;
 
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			color: $godaddy-color-black;
+			outline: none;
 		}
 	}
 
 	// with icon (close button)
 	&.has-icon {
-		&:hover:not([disabled]) {
+		&:hover:not([disabled]),
+		&:active:not([disabled]) {
 			background-color: transparent;
 			color: $godaddy-color-brand;
 		}
