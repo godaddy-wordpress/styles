@@ -6,12 +6,23 @@
 	border: 0;
 	border-radius: 6px;
 	box-shadow: none;
-	height: 56px !important;
-	padding: 16px 24px;
+	padding: 1.1em 2em 1em;
 	transition: background-color, color, 0.2s ease-in-out;
 
 	&:disabled {
 		opacity: 0.5;
+	}
+
+	// Without extra padding
+	&.no-padding {
+		padding: 0;
+	}
+
+	// isBig
+	&.is-big {
+		font-size: 1.1em;
+		font-weight: 600;
+		padding: 2em;
 	}
 
 	// isPrimary
@@ -43,11 +54,13 @@
 	&.is-link {
 		box-shadow: none;
 		color: $godaddy-color-brand;
+		padding: 0;
 		text-decoration: none;
 
 		&:hover:not([disabled]),
 		&:active:not([disabled]) {
 			color: $godaddy-color-black;
+			outline: none;
 		}
 	}
 
