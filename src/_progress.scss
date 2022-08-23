@@ -5,11 +5,11 @@
 .components-modal__header {
     .publish-guide-progress {
         &-bar-foreground {
-            background: #00a4a6;
+            background: $godaddy-color-progress-bar-foreground;
         }
 
         &-bar-background {
-            background: #f4f8fc;
+            background: $godaddy-color-progress-bar-background;
         }
     }
 }
