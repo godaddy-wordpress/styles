@@ -1,0 +1,15 @@
+/*
+ * import PublishGuideProgress from './publish-guide-progress';
+ * GoDaddy Launch Publish Guide Progress Component
+ */
+.components-modal__header {
+    .publish-guide-progress {
+        &-bar-foreground {
+            background: $godaddy-color-progress-bar-foreground;
+        }
+
+        &-bar-background {
+            background: $godaddy-color-progress-bar-background;
+        }
+    }
+}
