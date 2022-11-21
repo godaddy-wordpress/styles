@@ -16,6 +16,16 @@
 		opacity: 0.5;
 	}
 
+	& > svg {
+		height: 24px;
+		margin-left: 0.2em;
+		position: relative;
+		right: -5px;
+		top: -1px;
+		transform: scale(0.75);
+		width: 24px;
+	}
+
 	// Without extra padding
 	&.no-padding {
 		padding: 0;
@@ -28,7 +38,7 @@
 		padding: 1.5em;
 	}
 
-	// isPrimary
+	// <Button variant="primary" />
 	&.is-primary {
 		background-color: #000;
 		box-shadow: none;
@@ -40,7 +50,7 @@
 		}
 	}
 
-	// isSecondary
+	// <Button variant="secondary" />
 	&.is-secondary {
 		box-shadow: none;
 		color: $godaddy-color-black;
@@ -53,7 +63,19 @@
 		}
 	}
 
-	// isLink
+	// <Button variant="tertiary" />
+	&.is-tertiary {
+		border: 1px solid #111;
+		color: #111;
+
+		&:hover {
+			background-color: #111;
+			box-shadow: none;
+			color: #fff;
+		}
+	}
+
+	// <Button variant="link" />
 	&.is-link {
 		box-shadow: none;
 		color: $godaddy-color-brand;
